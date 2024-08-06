@@ -1,26 +1,32 @@
-const TransactionHistory = ({items}) => {
+import s from "./TransactionHistory.module.css";
+
+const TransactionHistory = ({ items }) => {
   return (
-    <table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Amount</th>
-      <th>Currency</th>
-    </tr>
-  </thead>
+    <table className={s.table}>
+      <thead>
+        <tr className={s.header}>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Currency</th>
+        </tr>
+      </thead>
 
-  <tbody>
-  {items.map((item) => (
-    <tr key={item.id}>
-      <td>{item.type}</td>
-      <td>{item.amount}</td>
-      <td>{item.currency}</td>
-    </tr>
-))}
+      <tbody>
+        {items.map((item) => (
+          <tr className={s.main} key={item.id}>
+            <td className={s.line}>
+              {item.type
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
+            </td>
+            <td className={s.line}>{item.amount}</td>
+            <td className={s.line}>{item.currency}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
-  </tbody>
-</table>
-
-  )
-}
-export default TransactionHistory
+export default TransactionHistory;
